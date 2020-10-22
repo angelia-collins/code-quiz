@@ -52,6 +52,8 @@ var QuestionsArr = [
 ]
 var body = document.querySelector("body");
 var timer = document.getElementById("timer");
+var div = document.querySelector("div");
+var startBtn = document.querySelector("button");
 
 var timeCount = 75;
 
@@ -60,11 +62,14 @@ function setCounterText(){
 }
 
 setCounterText();
-// timer.addEventListener("click", function() {
-//     count--;
-//     console.log("increment clicked " + count);
-//     setCounterText();
-// });
-// function startTimer() {
-//     timeCount--
-// }
+
+startBtn.addEventListener("click", function() {
+    var timerInterval = setInterval(function() {
+        timeCount--;
+        setCounterText(); 
+        if(timeCount === 0) {
+            clearInterval(timerInterval);
+        }
+    }, 1000) 
+        
+    });
