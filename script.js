@@ -58,6 +58,8 @@ var h1El = document.querySelector("h1");
 var pEl = document.getElementById("flavor-text");
 
 var timeCount = 75;
+var i = 0;
+
 
 function setCounterText(){
     timer.textContent = "Time: " + timeCount;
@@ -82,5 +84,17 @@ startBtn.addEventListener("click", function(event) {
             clearInterval(timerInterval);
         }
     }, 1000) 
-        
+    // var i = 0;
+    h1El.textContent = JSON.stringify(QuestionsArr[i]);
+    i++;
+    // for (var i = 0; i < QuestionsArr.length; i++) {
+    //     h1El.innerText = JSON.stringify(QuestionsArr[i]);
+    // }
+    // QuestionsArr.forEach(element => console.log(element)); 
+    // var i =0
+    // QuestionsArr.forEach(callback (element[i]) {
+        // h1El.textContent = QuestionsArr; 
+        //     return console.log(element);
+        // }); 
+
     });
