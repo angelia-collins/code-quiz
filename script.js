@@ -52,8 +52,10 @@ var QuestionsArr = [
 ]
 var body = document.querySelector("body");
 var timer = document.getElementById("timer");
-var div = document.querySelector("div");
+// var container = document.getElementById("container");
 var startBtn = document.querySelector("button");
+var h1El = document.querySelector("h1");
+var pEl = document.getElementById("flavor-text");
 
 var timeCount = 75;
 
@@ -61,9 +63,18 @@ function setCounterText(){
     timer.textContent = "Time: " + timeCount;
 }
 
+function startScreen(){
+    h1El.textContent = "It's time to take a quiz."
+    pEl.textContent = "Take this Javascript quiz to stay nerdy."
+    startBtn.textContent = "Start Quiz"
+}
+
+startScreen();
+
 setCounterText();
 
-startBtn.addEventListener("click", function() {
+startBtn.addEventListener("click", function(event) {
+    event.preventDefault()
     var timerInterval = setInterval(function() {
         timeCount--;
         setCounterText(); 
