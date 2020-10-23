@@ -1,48 +1,48 @@
 var QuestionsArr = [
     {
-        question: "1. words words words",
-        answers:{
-            a: "1.",
-            b: "2.",
-            c: "3.",
-            d: "4.",
-        },
+        question: "1. A very useful tool used during development and debugging for printing content to the debugger is:",
+        answers:[
+            "JavaScript", 
+            "terminal/bash", 
+            "for loops",
+            "console log", 
+        ],
     },
     {
-        question: "2. words words words",
-        answers: {
-            a: "1.",
-            b: "2.",
-            c: "3.",
-            d: "4.",
-        },
+        question: "2. String values must be enclosed within ___ when being assigned to variables.",
+        answers: [
+            "commas",
+            "curly brackets",
+            "quotes",
+            "parentheses",
+        ],
     },
     {
-        question: "3. words words words",
-        answers: {
-            a: "1.",
-            b: "2.",
-            c: "3.",
-            d: "4.",
-        },
+        question: "3. Arrays in JavaScript can be used to store _____.",
+        answers: [
+            "numbers and strings",
+            "other arrays",
+            "booleans",
+            "all of the above",
+        ],
     },
     {
-        question: "4. words words words",
-        answers: {
-            a: "1.",
-            b: "2.",
-            c: "3.",
-            d: "4.",
-        },
+        question: "4. The condition in an if / else statement is enclosed within _____.",
+        answers: [
+            "quotes",
+            "curly brackets",
+            "parentheses",
+            "square brackets",
+        ],
     },
     {
-        question: "5. words words words",
-        answers: {
-            a: "1.",
-            b: "2.",
-            c: "3.",
-            d: "4.",
-        },
+        question: "5. Commonly used data types DO NOT include:",
+        answers:[
+            "strings", 
+            "booleans", 
+            "alerts", 
+            "numbers",
+        ],
     },
 ]
 var body = document.querySelector("body");
