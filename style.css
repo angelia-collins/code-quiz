@@ -1,33 +1,29 @@
+body {
+    text-align: center;
+}
+
 #score {
     width: 50%;
     float: left;
     margin: 0px 0px 0px 0px;
+    text-align: left;
 }
 
 #timer {
     width: 50%; 
     float: left;
-    /* position: fixed; */
-    /* right: 0px; */
+    text-align: right;
     margin: 0px 0px 0px 0px;
 }
 
 button {
   padding: 10px;
-  margin: 24px;
   font-size: 24px;
   background-color: #247BA0;
   color: white;
 }
 
-.container {
-    width: 100%;
-    margin: 0 auto;
-    /* padding: 20px 20px 20px 20px; */
-    /* text-align: center; */
-    /* vertical-align: auto; */
-}
 
-/* h1 {
-    margin: 100px 20px 20px 20px;
+/* #container {
+    text-align: center;
 } */

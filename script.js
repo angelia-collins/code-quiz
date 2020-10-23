@@ -1,7 +1,7 @@
 var QuestionsArr = [
     {
         question: "1. words words words",
-        answers: {
+        answers:{
             a: "1.",
             b: "2.",
             c: "3.",
@@ -48,9 +48,10 @@ var QuestionsArr = [
 var body = document.querySelector("body");
 var timer = document.getElementById("timer");
 // var container = document.getElementById("container");
-var startBtn = document.querySelector("button");
+var startBtn = document.getElementById("start");
 var h1El = document.querySelector("h1");
 var pEl = document.getElementById("flavor-text");
+var answerBtn = document.getElementById("answers");
 
 var timeCount = 75;
 var i = 0;
@@ -65,6 +66,7 @@ function startScreen(){
     h1El.textContent = "It's time to take a quiz."
     pEl.textContent = "Take this Javascript quiz to stay nerdy. Your time will go down by 10 seconds for every wrong answer."
     startBtn.textContent = "Start Quiz"
+    answerBtn.style.display = "none";
 }
 
 function gameOver() {
@@ -77,29 +79,29 @@ startScreen();
 
 setCounterText();
 
+function makeTimer() {
+    var timerInterval = setInterval(function() {
+    timeCount--;
+    setCounterText(); 
+    i++;
+
+    if(timeCount === 0 || i < QuestionsArr.length) {
+        clearInterval(timerInterval);
+        gameOver();
+    }
+}, 1000) 
+}
+
 startBtn.addEventListener("click", function(event) {
     event.preventDefault()
     startBtn.style.display = "none";
     pEl.textContent = " ";
-    var timerInterval = setInterval(function() {
-        timeCount--;
-        setCounterText(); 
-        if(timeCount === 0 || i < QuestionsArr.length) {
-            clearInterval(timerInterval);
-            gameOver();
-        }
-    }, 1000) 
-    // var i = 0;
-    // h1El.textContent = JSON.stringify(QuestionsArr[i]);
-    // i++;
-    for (var i = 0; i < QuestionsArr.length; i++) {
-        h1El.innerText = JSON.stringify(QuestionsArr[i]);
-    }
-    // QuestionsArr.forEach(element => console.log(element)); 
-    // var i =0
-    // QuestionsArr.forEach(callback (element[i]) {
-        // h1El.textContent = QuestionsArr; 
-        //     return console.log(element);
-        // }); 
+    makeTimer();
+    h1El.textContent = QuestionsArr[i].question;
+    answerBtn.style.display = "block";
 
+    for (i = 0; i < QuestionsArr.length; i++) {
+        answerBtn = document.createElement("button");
+        answerBtn.textContent = QuestionsArr[i].answers;
+        }
     });
