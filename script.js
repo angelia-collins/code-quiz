@@ -110,11 +110,7 @@ startBtn.addEventListener("click", function(event) {
 
 
     for (var idx_answer = 0; idx_answer < answerQty; idx_answer++) {
-        var newAnswerBtn = document.createElement("button");
-        
-        // Storing index of answer in the buttons
-        newAnswerBtn.id = "answer-" + idx_answer;
-        answerDiv.append(newAnswerBtn);
+        var newAnswerBtn = document.getElementById("answer-" + idx_answer);
         newAnswerBtn.textContent = QuestionsArr[idx_question].answers[idx_answer];
         
         //Make Answer buttons clickable and recognize the right answer
