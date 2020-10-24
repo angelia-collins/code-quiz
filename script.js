@@ -59,11 +59,16 @@ var pEl = document.getElementById("flavor-text");
 var answerDiv = document.getElementById("answers");
 var inputDiv = document.getElementById("initals");
 var notify = document.getElementById("wrong-right");
-
+var submitBtn = document.getElementById("submit");
+var inputField = document.querySelector("input");
+var nameList = document.querySelector("Name-and-Scores");
+var HighScoreDiv = document.getElementById("high-score");
 
 var timeCount = 75;
 var idx_question = 0;
 var scoreCount = 0;
+
+var aName = [];
 
 
 function setCounterText() {
@@ -76,6 +81,7 @@ function startScreen() {
     startBtn.textContent = "Start Quiz"
     answerDiv.style.display = "none";
     inputDiv.style.display = "none";
+    HighScoreDiv.style.display = "none";
 }
 
 function gameOver() {
@@ -83,6 +89,16 @@ function gameOver() {
     pEl.textContent = "Your score is " + scoreCount;
     answerDiv.style.display = "none";
     inputDiv.style.display = "block";
+    HighScoreDiv.style.display = "none";
+}
+
+function highScorePage() {
+    HighScoreDiv.style.display = "block";
+    h1El.textContent = "Highscores";
+    pEl.style.display = "none";
+    answerDiv.style.display = "none";
+    inputDiv.style.display = "none";
+    notify.style.display = "none";
 }
 
 startScreen();
@@ -93,7 +109,6 @@ function makeTimer() {
     timerInterval = setInterval(function () {
         timeCount--;
         setCounterText();
-        // idx_question++;
 
         if (timeCount === 0) {
             clearInterval(timerInterval);
@@ -125,15 +140,15 @@ startBtn.addEventListener("click", function (event) {
             }
             //remove 10 seconds on timer for wrong answers
             else {
-                timeCount = timeCount-10;
+                timeCount = timeCount - 10;
                 notify.textContent = "Wrong";
             }
             //if there's a next question go to the next one else go to end screen
-            var questionsRemaining = idx_question < QuestionsArr.length-1;
+            var questionsRemaining = idx_question < QuestionsArr.length - 1;
             if (questionsRemaining) {
                 activateQuestion(idx_question + 1);
             }
-            else  {
+            else {
                 gameOver();
                 clearInterval(timerInterval);
             }
@@ -155,3 +170,54 @@ function activateQuestion(idx_new) {
     }
     idx_question = idx_new;
 }
+
+submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    highScorePage();
+    storeHighScoreNames();
+
+    function renderHighScores() {
+      
+        for (var i = 0; i < aName.length; i++) {
+          var aName = aName[i];
+      
+          var li = document.createElement("li");
+          li.textContent = aName;
+          li.setAttribute("data-index", i);
+          
+          nameList.appendChild(li);
+        }
+      }
+      
+    
+
+      function storeInitials() {
+        var storedNames = JSON.parse(localStorage.getItem("names"));
+      
+        // If todos were retrieved from localStorage, update the todos array to it
+        if (storedNames !== null) {
+          aName = storedNames;
+        }
+      
+        // Render todos to the DOM
+        renderHighScores();
+        console.log(aName);
+      }
+      
+      function storeHighScoreNames() {
+        localStorage.setItem("names", JSON.stringify(aName));
+      }
+      var nameText = inputField.value.trim();
+      if (nameText === "") {
+        return;
+      }
+      aName.push(nameText);
+    inputField.value = "";
+
+  // Store updated todos in localStorage, re-render the list
+  storeInitials();
+  renderHighScores();
+
+
+    
+})
