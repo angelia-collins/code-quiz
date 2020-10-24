@@ -28,6 +28,6 @@ button {
     margin: 10px;
 }
 
-/* #container {
-    text-align: center;
-} */
+#submit button{
+    display: block;
+}

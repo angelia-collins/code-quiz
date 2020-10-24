@@ -52,11 +52,12 @@ var QuestionsArr = [
 ]
 var body = document.querySelector("body");
 var timer = document.getElementById("timer");
-// var container = document.getElementById("container");
+var timerInterval;
 var startBtn = document.getElementById("start");
 var h1El = document.querySelector("h1");
 var pEl = document.getElementById("flavor-text");
 var answerDiv = document.getElementById("answers");
+var inputDiv = document.getElementById("initals");
 
 var timeCount = 75;
 var idx_question = 0;
@@ -72,12 +73,14 @@ function startScreen() {
     pEl.textContent = "Take this Javascript quiz to stay nerdy. Your time will go down by 10 seconds for every wrong answer."
     startBtn.textContent = "Start Quiz"
     answerDiv.style.display = "none";
+    inputDiv.style.display = "none";
 }
 
 function gameOver() {
     h1El.textContent = "It's over!";
     pEl.textContent = "Your score is " + scoreCount;
-
+    answerDiv.style.display = "none";
+    inputDiv.style.display = "block";
 }
 
 startScreen();
@@ -85,10 +88,10 @@ startScreen();
 setCounterText();
 
 function makeTimer() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         timeCount--;
         setCounterText();
-        idx_question++;
+        // idx_question++;
 
         if (timeCount === 0) {
             clearInterval(timerInterval);
@@ -99,10 +102,11 @@ function makeTimer() {
 
 startBtn.addEventListener("click", function (event) {
     event.preventDefault()
+    scoreCount = 0;
     startBtn.style.display = "none";
     answerDiv.style.display = "block";
     pEl.textContent = " ";
-    // makeTimer();
+    makeTimer();
     for (var idx_answer = 0; idx_answer < 4; idx_answer++) {
         //Make Answer buttons clickable and recognize the right answer
         var newAnswerBtn = document.getElementById("answer-" + idx_answer);
@@ -111,7 +115,24 @@ startBtn.addEventListener("click", function (event) {
             var correctAnswer = QuestionsArr[idx_question].correctAnswer;
 
 
-            alert(chosenAnswer === correctAnswer);
+            var result = chosenAnswer === correctAnswer;
+            //add result to player score
+            if (result) {
+                scoreCount++;
+            }
+            //remove 10 seconds on timer for wrong answers
+            else {
+                timeCount = timeCount-10;
+            }
+            //if there's a next question go to the next one else go to end screen
+            var questionsRemaining = idx_question < QuestionsArr.length-1;
+            if (questionsRemaining) {
+                activateQuestion(idx_question + 1);
+            }
+            else  {
+                gameOver();
+                clearInterval(timerInterval);
+            }
         });
     }
     activateQuestion(0);
