@@ -63,7 +63,7 @@ var submitBtn = document.getElementById("submit");
 var inputField = document.querySelector("input");
 var nameList = document.querySelector("Name-and-Scores");
 var HighScoreDiv = document.getElementById("high-score");
-
+var backBtn = document.getElementById("backBtn");
 var timeCount = 75;
 var idx_question = 0;
 var scoreCount = 0;
@@ -194,12 +194,10 @@ submitBtn.addEventListener("click", function (event) {
       function storeInitials() {
         var storedNames = JSON.parse(localStorage.getItem("names"));
       
-        // If todos were retrieved from localStorage, update the todos array to it
         if (storedNames !== null) {
           aName = storedNames;
         }
       
-        // Render todos to the DOM
         renderHighScores();
         console.log(aName);
       }
@@ -214,10 +212,10 @@ submitBtn.addEventListener("click", function (event) {
       aName.push(nameText);
     inputField.value = "";
 
-  // Store updated todos in localStorage, re-render the list
   storeInitials();
-  renderHighScores();
+  renderHighScores();   
+})
 
-
-    
+backBtn.addEventListener("click", function (event) {
+    location.reload();
 })
