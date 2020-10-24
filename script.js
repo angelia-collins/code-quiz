@@ -58,6 +58,8 @@ var h1El = document.querySelector("h1");
 var pEl = document.getElementById("flavor-text");
 var answerDiv = document.getElementById("answers");
 var inputDiv = document.getElementById("initals");
+var notify = document.getElementById("wrong-right");
+
 
 var timeCount = 75;
 var idx_question = 0;
@@ -70,7 +72,7 @@ function setCounterText() {
 
 function startScreen() {
     h1El.textContent = "It's time to take a quiz."
-    pEl.textContent = "Take this Javascript quiz to stay nerdy. Your time will go down by 10 seconds for every wrong answer."
+    pEl.textContent = "Take this Javascript quiz to stay nerdy. Your time will go down by 10 seconds for every wrong answer. One point will be added for every correct answer."
     startBtn.textContent = "Start Quiz"
     answerDiv.style.display = "none";
     inputDiv.style.display = "none";
@@ -119,10 +121,12 @@ startBtn.addEventListener("click", function (event) {
             //add result to player score
             if (result) {
                 scoreCount++;
+                notify.textContent = "Correct";
             }
             //remove 10 seconds on timer for wrong answers
             else {
                 timeCount = timeCount-10;
+                notify.textContent = "Wrong";
             }
             //if there's a next question go to the next one else go to end screen
             var questionsRemaining = idx_question < QuestionsArr.length-1;
