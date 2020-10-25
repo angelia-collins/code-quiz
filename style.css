@@ -31,3 +31,6 @@ button {
 #submit button{
     display: block;
 }
+ul {
+    list-style-type: none;
+}
