@@ -61,9 +61,11 @@ var inputDiv = document.getElementById("initals");
 var notify = document.getElementById("wrong-right");
 var submitBtn = document.getElementById("submit");
 var inputField = document.querySelector("input");
-var nameList = document.querySelector("Name-and-Scores");
+var nameList = document.getElementById("Name-and-Scores");
 var HighScoreDiv = document.getElementById("high-score");
 var backBtn = document.getElementById("backBtn");
+var clearBtn = document.getElementById("clearBtn");
+
 var timeCount = 75;
 var idx_question = 0;
 var scoreCount = 0;
@@ -175,47 +177,52 @@ submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     highScorePage();
     storeHighScoreNames();
+    renderHighScores(); 
 
     function renderHighScores() {
       
         for (var i = 0; i < aName.length; i++) {
-          var aName = aName[i];
-      
+            console.log(aName);
           var li = document.createElement("li");
-          li.textContent = aName;
+          li.textContent = aName[i];
           li.setAttribute("data-index", i);
           
           nameList.appendChild(li);
         }
       }
       
-    
-
-      function storeInitials() {
+      function storeHighScoreNames() {
         var storedNames = JSON.parse(localStorage.getItem("names"));
-      
+        console.log(storedNames);
         if (storedNames !== null) {
           aName = storedNames;
         }
-      
-        renderHighScores();
+        var nameText = inputField.value.trim();
+        console.log(nameText);
+        aName.push(nameText + "-" + scoreCount);
+        aName.sort(function(a,b){
+           var aScore = a.split("-")[1];
+           var bScore = b.split("-")[1];
+            if (aScore > bScore) {
+                return -1;
+            }
+            if (aScore < bScore) {
+                return 1;
+            }
+            return 0;
+        });
         console.log(aName);
-      }
-      
-      function storeHighScoreNames() {
+        inputField.value = "";
         localStorage.setItem("names", JSON.stringify(aName));
-      }
-      var nameText = inputField.value.trim();
-      if (nameText === "") {
-        return;
-      }
-      aName.push(nameText);
-    inputField.value = "";
+      }  
+})
 
-  storeInitials();
-  renderHighScores();   
+clearBtn.addEventListener("click", function (event) {
+    nameList.style.display = "none";
+    localStorage.clear();
 })
 
 backBtn.addEventListener("click", function (event) {
     location.reload();
 })
+
