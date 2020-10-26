@@ -2,13 +2,6 @@ body {
     text-align: center;
 }
 
-#score {
-    width: 50%;
-    float: left;
-    margin: 0px 0px 0px 0px;
-    text-align: left;
-}
-
 #timer {
     width: 50%; 
     float: left;
@@ -31,6 +24,12 @@ button {
 #submit button{
     display: block;
 }
+
 ul {
     list-style-type: none;
+}
+
+#score button{
+    width: 50%;
+    float: left;
 }

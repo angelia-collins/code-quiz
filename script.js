@@ -65,6 +65,7 @@ var nameList = document.getElementById("Name-and-Scores");
 var HighScoreDiv = document.getElementById("high-score");
 var backBtn = document.getElementById("backBtn");
 var clearBtn = document.getElementById("clearBtn");
+var seeHighScoreBtn = document.getElementById("score");
 
 var timeCount = 75;
 var idx_question = 0;
@@ -177,32 +178,34 @@ submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     highScorePage();
     storeHighScoreNames();
-    renderHighScores(); 
+    renderHighScores();
+})
 
-    function renderHighScores() {
-      
-        for (var i = 0; i < aName.length; i++) {
-            console.log(aName);
-          var li = document.createElement("li");
-          li.textContent = aName[i];
-          li.setAttribute("data-index", i);
-          
-          nameList.appendChild(li);
-        }
-      }
-      
-      function storeHighScoreNames() {
-        var storedNames = JSON.parse(localStorage.getItem("names"));
-        console.log(storedNames);
-        if (storedNames !== null) {
-          aName = storedNames;
-        }
-        var nameText = inputField.value.trim();
+function renderHighScores() {
+
+    for (var i = 0; i < aName.length; i++) {
+        console.log(aName);
+        var li = document.createElement("li");
+        li.textContent = aName[i];
+        li.setAttribute("data-index", i);
+
+        nameList.appendChild(li);
+    }
+}
+
+function storeHighScoreNames() {
+    var storedNames = JSON.parse(localStorage.getItem("names"));
+    console.log(storedNames);
+    if (storedNames !== null) {
+        aName = storedNames;
+    }
+    var nameText = inputField.value.trim();
+    if (nameText.length !== 0) {
         console.log(nameText);
         aName.push(nameText + "-" + scoreCount);
-        aName.sort(function(a,b){
-           var aScore = a.split("-")[1];
-           var bScore = b.split("-")[1];
+        aName.sort(function (a, b) {
+            var aScore = a.split("-")[1];
+            var bScore = b.split("-")[1];
             if (aScore > bScore) {
                 return -1;
             }
@@ -211,18 +214,25 @@ submitBtn.addEventListener("click", function (event) {
             }
             return 0;
         });
+    }
         console.log(aName);
         inputField.value = "";
         localStorage.setItem("names", JSON.stringify(aName));
-      }  
-})
+    }
 
-clearBtn.addEventListener("click", function (event) {
-    nameList.style.display = "none";
-    localStorage.clear();
-})
+    clearBtn.addEventListener("click", function (event) {
+        nameList.style.display = "none";
+        localStorage.clear();
+    })
 
-backBtn.addEventListener("click", function (event) {
-    location.reload();
-})
+    backBtn.addEventListener("click", function (event) {
+        location.reload();
+    })
 
+    seeHighScoreBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        startBtn.style.display = "none";
+        highScorePage();
+        storeHighScoreNames();
+        renderHighScores();
+    })
